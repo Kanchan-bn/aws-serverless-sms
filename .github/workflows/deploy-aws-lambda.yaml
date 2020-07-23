@@ -1,9 +1,9 @@
 name: deploy-aws-lambda
 on:
   push:
-    paths-ignore:
-      - README.md
-      - serverless.yml
+    tags-ignore:
+      - *.md
+      - serverless.*
     branches-ignore:
       - 'tests/'
 jobs:
