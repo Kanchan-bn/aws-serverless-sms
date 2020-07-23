@@ -2,10 +2,35 @@
 Lambda function triggered on S3 event
 The function is integrated with twilio to send SMS when file is uploaded to S3 bucket
 
+# Setup Instructions
+1. Clone the repo. (I have used VSCode with AWS toolkit)
+2. ```npm install```
+3. To run tests ```npm test```
+4. To create package ```sls package```
+5. To deploy ```sls deploy``` (assuming AWS credentials are all created and setup on the IDE)
+6. To run the pipeline push to master -> on github navigate to Actions tab and see progress of the thread
+
+# To test on AWS
+## Trigger setup
+1. Login to AWS management console -> Navigate to S3 bucket and create a bucket by name operata-logfile-bucket
+2. Navigate to Properties tab from the bucket and click on Events
+3. Click on +Add Notification
+ * fill in the name 
+ * select PUT event
+ * suffix: .log 
+ * Select the lambda function from the Send To dropdown 
+ * Save
+
+## Lambda Env variables setup
+1. Navigate to Lambda console and ensure that it has been deployed with name - serverless-function-dev-s3TriggerFunction
+2. Setup the Env variables in .dev.env with real values on the console with real values
+3. Test by uploading a sample log file to S3 bucket
+
+
 # Assumption
 1. File upload to the S3 bucket is out of scope
 2. S3 bucket for file upload already exists
-3. AWS credentials are available to use
+3. AWS credentials are available to use (and setup on the IDE) - IAM user credentials
 4. Twilio account has been created
 
 # Design
@@ -48,13 +73,14 @@ The function is integrated with twilio to send SMS when file is uploaded to S3 b
 1. To run Github Action when master branch is pushed
 2. The Github Action runs tests before deploying to AWS
 3. AWS credentials are stored securely on Github for deployment.
-4. Chose Github Action because it was the easiest to implement. Didn't get time to investigate other options
+4. Currently only deploys dev version. This is so that we can use the .dev.env file for testing. The script can be updated to deploy to production.
+5. Chose Github Action because it was the easiest to implement. Didn't get time to investigate other options
 
 # Operational support
-1. Since the Twilio credentials need to be saved securely they need to be configured as Env variables in Lambda console where more security measures can be taken to secure them
+1. Since the real Twilio credentials need to be saved securely they need to be configured as Env variables in Lambda console where more security measures can be taken to secure them
 (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
-There will be an effort involved everytime the "To Number" or credentials themselves need to be changed
-2. Manual setting up of Trigger on the S3 bucket
+There will be an effort involved everytime the "To Number" or credentials themselves need to be changed on the console
+2. Manual effort of setting up of the Event Trigger on the S3 bucket
 
 # Issues encountered
 1. Kept getting stuck at yml and had to figure out how to write it properly :)
