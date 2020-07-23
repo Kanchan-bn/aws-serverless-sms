@@ -1,11 +1,8 @@
 name: deploy-aws-lambda
 on:
   push:
-    tags-ignore:
-      - README.*
-      - serverless.*
-    branches-ignore:
-      - 'tests/'
+    branches:    
+      - master
 jobs:
   deploy_source:
     name: build and deploy lambda
