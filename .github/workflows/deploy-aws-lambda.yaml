@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - README.md
+      - serverless.yml
+    branches-ignore:
+      - 'tests/'
 jobs:
   deploy_source:
     name: build and deploy lambda

@@ -38,7 +38,6 @@ describe('Tests notify function by changing from and to numbers', function () {
         }catch(err){
             testError = err.message;
         }         
-        console.log(process.env.NODE_ENV);
         expect(testError).to.be.a('string');
         expect(testError).to.have.string("A 'To' phone number is required.");
     });

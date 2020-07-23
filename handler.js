@@ -3,7 +3,8 @@ const smsNotification  = require('./smsNotification');
 let response;
 
 module.exports.s3TriggerFunction = async event => {
-    console.log('serverless function');
+    console.log('serverless function has been triggered');
+    
     const record = event.Records[0];
     const eName = record.eventName;
     const bucketName = record.s3.bucket.name;
@@ -17,7 +18,6 @@ module.exports.s3TriggerFunction = async event => {
     if(eName.split(':')[1] === 'Put' && objKey.includes('.log')){
         try{
             let notification = await smsNotification.notifyUserBySms();
-            console.log(notification);
             returnCode = 200;
             returnStatus = notification.status;
             returnMessage = notification.body + '' + bucketName;
@@ -42,7 +42,6 @@ module.exports.s3TriggerFunction = async event => {
         'status': returnStatus,
         'body': JSON.stringify({message: returnMessage})
     }
-    console.log(response);
     return response
 
 };

@@ -4,7 +4,7 @@ const handler = require('../handler');
 const chai = require('chai');
 const expect = chai.expect;
 
-const event = {
+const correctEvent = {
     "Records":[
       {
         "eventVersion":"2.0",
@@ -43,10 +43,9 @@ const event = {
     ]
   };
 
-
 describe('Tests handler', function () {
     it('verifies successful response', async () => {
-        const result = await handler.s3TriggerFunction(event);
+        const result = await handler.s3TriggerFunction(correctEvent);
 
         expect(result).to.be.an('object');
         expect(result.statusCode).to.equal(200);
