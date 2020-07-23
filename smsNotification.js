@@ -6,10 +6,10 @@ if(process.env.NODE_ENV !== 'production') {
     require('dotenv').config({path: configPath});
 }
 
-const accountSid = process.env.TWILIO_ACC_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const fromNumber = process.env.TWILIO_SMS_FROM_NUMBER;
-const toNumber = process.env.TWILIO_SMS_TO_NUMBER;
+const accountSid = process.env.ACC_SID;
+const authToken = process.env.AUTH_TOKEN;
+const fromNumber = process.env.SMS_FROM_NUMBER;
+const toNumber = process.env.SMS_TO_NUMBER;
 
 const client = require('twilio')(accountSid, authToken);
 

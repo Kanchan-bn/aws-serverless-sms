@@ -31,7 +31,7 @@ describe('Tests notify function by changing from and to numbers', function () {
     });
 
     it('verifies error response for empty to number', async () => {
-        const from = process.env.TWILIO_SMS_FROM_NUMBER;
+        const from = process.env.SMS_FROM_NUMBER;
         const to = '';
         try{
             const result = await smsNotification.notify(from, to);
