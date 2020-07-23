@@ -1,8 +1,6 @@
 name: deploy-aws-lambda
 on:
   push:
-    branches:
-      - master
     paths-ignore:
       - README.md
       - serverless.yml
